@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use Src\BracketsExpression;
 use tests\helpers\PrivateMethodTrait;
 
-class ExpressionTest extends TestCase
+class BracketsExpressionTest extends TestCase
 {
     use PrivateMethodTrait;
 
@@ -99,12 +99,15 @@ class ExpressionTest extends TestCase
     public function balanceBracketValidationDataProvider()
     {
         return [
-//            ['(a+b)', true],
-//            ['[(a+b)]', true],
-//            ['[a * (a+b)]', true],
-//            ['[a * (a+b)]', true],
-//            ['[a * (a+b)', false],
+            ['(a+b)', true],
+            ['[(a+b)]', true],
+            ['[a * (a+b)]', true],
+            ['[a * (a+b)]', true],
+            ['[a * (a+b)', false],
             ['[a+b)', false],
+            ['[a+b)]', false],
+            [']', false],
+            ['a+b]}', false],
         ];
     }
 }

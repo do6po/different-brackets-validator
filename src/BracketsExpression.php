@@ -70,10 +70,13 @@ class BracketsExpression
                 continue;
             } elseif (
                 count($openedBrackets) > 0
-                && $bracketObject->canCloseBy(ArrayHelper::getLastElementOfArray($openedBrackets))
+                /** @var BracketsAbstract $lastBracket */
+                && $lastBracket = ArrayHelper::getLastElementOfArray($openedBrackets)
             ) {
-                array_pop($openedBrackets);
-                continue;
+                if ($lastBracket->canCloseBy($bracketObject)) {
+                    array_pop($openedBrackets);
+                    continue;
+                }
             }
 
             return false;
